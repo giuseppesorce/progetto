@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Progetto</string>
+    <string name="assets_fonts_folder" translatable="false">fonts/</string>
+</resources>

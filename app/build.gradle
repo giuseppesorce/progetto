@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.giuseppesorce.progetto"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+           shrinkResources true
+            multiDexEnabled true
+            buildConfigField "String", "BASE_URL", '"http://www.giuseppesorce.com/"'
+            buildConfigField "boolean", "debug", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            multiDexEnabled true
+            buildConfigField "String", "BASE_URL", '"http://www.giuseppesorce.com/"'
+            buildConfigField "boolean", "debug", "true"
+        }
+        android {
+            lintOptions {
+                checkReleaseBuilds false
+                abortOnError false
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //VERSION LIB
+
+    String supportVersion = '25.3.0'
+    String retrofitVersion = '2.1.0'
+    String butterknifeVersion = '8.5.1'
+    String daggerVersion = '2.4'
+    compile "com.android.support:support-v13:$supportVersion"
+    compile "com.android.support:appcompat-v7:25.3.0"
+    compile "com.android.support:design:$supportVersion"
+    compile "com.android.support:recyclerview-v7:$supportVersion"
+    compile "com.android.support:support-v13:$supportVersion"
+    compile "com.android.support:support-annotations:$supportVersion"
+    //RX
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+
+    //RETROFIT
+    compile "com.squareup.okhttp3:okhttp:3.2.0"
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:2.1.0"
+    compile "com.squareup.retrofit2:converter-gson:2.1.0"
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //BUTTERKNIFE
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    apt "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+
+//    //DAGGER
+    compile "com.google.dagger:dagger:$daggerVersion"
+    apt "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'javax.annotation:javax.annotation-api:1.2'
+
+
+}
